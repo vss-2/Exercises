@@ -1,7 +1,7 @@
 .data
-x: .word 2
-y: .word 2
-z: .word 2
+x: .word 3
+y: .word 4
+z: .word 5
 a: .word 1
 
 .text
@@ -38,20 +38,25 @@ a: .word 1
 	#testando tipo do triangulo
 	triangulo:
 	beq $t1, $t2, equilateroouisoseles
-	beq $t2, $t3, isoseles
-	beq $t1, $t3, isoseles
+	beq $t2, $t3, isosceles
+	beq $t1, $t3, isosceles
 	j escaleno
 	
 	equilateroouisoseles:
 	beq $t3, $t1, equilatero
-	j isoseles
-	isoceles:
+	j isosceles
 	
+	equilatero:
+	add $s1, $s7, $zero 
+	break
+	isosceles:
+	add $s2, $s7, $zero
+	break
 	escaleno:
+	add $s3, $s7, $zero
+	break
 	
 	
 	
 	
 	exit2:
-	
-	
