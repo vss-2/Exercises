@@ -1,0 +1,57 @@
+.data
+x: .word 2
+y: .word 2
+z: .word 2
+a: .word 1
+
+.text
+	load:
+	lw $t1, x
+	lw $t2, y
+	lw $t3, z
+	lw $s7, a #1
+	
+	add $t4, $t1, $t2 #x+y
+	add $t5, $t1, $t3 #x+z
+	add $t6, $t2, $t3 #y+z
+	
+	bgt $t4, $t3, L1 #x+y>z
+	j etapa2
+	L1:
+	bgt $t5, $t2, L2 #x+z>y
+	j etapa2
+	L2:
+	bgt $t6, $t1, L3 #y+z>x
+	j etapa2
+	L3:
+	add $t7, $s7, $zero #botanto 1 em s7 (é triangulo)
+	
+	etapa2: 
+	beq $t7, $zero, L4 #se for 0 pula pra L4 e termina. se for um segue
+	j triangulo #indo testar qual é
+	
+	
+	L4: 
+	add $v1, $s7, $zero
+	j exit2
+	
+	#testando tipo do triangulo
+	triangulo:
+	beq $t1, $t2, equilateroouisoseles
+	beq $t2, $t3, isoseles
+	beq $t1, $t3, isoseles
+	j escaleno
+	
+	equilateroouisoseles:
+	beq $t3, $t1, equilatero
+	j isoseles
+	isoceles:
+	
+	escaleno:
+	
+	
+	
+	
+	exit2:
+	
+	
