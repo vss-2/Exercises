@@ -1,0 +1,21 @@
+.data
+x: .word 7
+y: .word 11
+z: .word 0
+
+.text
+	load:
+	lw $t1, x
+	lw $t2, y
+	lw $t3, z
+	
+	bgt $t1, $t2, L1
+	L2:
+	add $t3, $t2, $zero
+	j exit
+	L1:
+	sra $t3, $t2, 2
+	j exit
+
+
+exit:
